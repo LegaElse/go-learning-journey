@@ -1,0 +1,33 @@
+package main
+
+import "fmt"
+
+// Структура Link — аналог класса в PHP
+type Link struct {
+	OriginalURL string
+	Clicks      int
+}
+
+// Функция RegisterClick принимает УКАЗАТЕЛЬ на Link
+func RegisterClick(l *Link) {
+	l.Clicks = l.Clicks + 1
+}
+
+func main() {
+	// Создаем экземпляр структуры (как new Link() в PHP)
+	myLink := Link{
+		OriginalURL: "https://example.com",
+		Clicks:      0,
+	}
+
+	// Выводим начальное состояние
+	fmt.Printf("URL: %s, Клики: %d\n", myLink.OriginalURL, myLink.Clicks)
+
+	// Вызываем функцию 3 раза, передавая АДРЕС переменной
+	RegisterClick(&myLink)
+	RegisterClick(&myLink)
+	RegisterClick(&myLink)
+
+	// Выводим финальное состояние
+	fmt.Printf("URL: %s, Клики: %d\n", myLink.OriginalURL, myLink.Clicks)
+}
